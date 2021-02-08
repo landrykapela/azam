@@ -3,6 +3,7 @@
   <head>
     <title>Azam Roster Demo</title>
     <link href="css/main.css" rel="stylesheet" />
+    <link href="css/calendar_g.css" rel="stylesheet" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
@@ -30,7 +31,7 @@
 
           <ul class="list-unstyled components">
             <p>User Dashboard</p>
-            <li class="active">
+            <li>
               <a
                 href="#activities"
                 data-toggle="collapse"
@@ -38,7 +39,7 @@
                 class="dropdown-toggle"
                 >Activities</a
               >
-              <ul class="collapse list-unstyled" id="users">
+              <ul class="collapse list-unstyled" id="activities">
                 <li>
                   <a href="#add_activity">Add Activity</a>
                 </li>
@@ -51,7 +52,24 @@
               </ul>
             </li>
             <li>
-              <a href="#schedule">Schedule</a>
+              <a
+                href="#add_schedule"
+                data-toggle="collapse"
+                aria-expanded="false"
+                class="dropdown-toggle"
+                >Weekly Schedule</a
+              >
+              <ul class="collapse list-unstyled" id="add_schedule">
+                <li>
+                  <a href="#add_schedule">New Schedule</a>
+                </li>
+                <li>
+                  <a href="#schedule">Check Schedule</a>
+                </li>
+                <li>
+                  <a href="#all_schedules">Schedule History</a>
+                </li>
+              </ul>
             </li>
             <li>
               <a href="#reports">Reports</a>
@@ -68,10 +86,297 @@
               <i class="material-icons" id="sidebarCollapse">menu</i>
             </div>
           </nav>
-          <div id="schedule"></div>
+          <div id="add_activity">
+            <form id="new_activity_form" class="col-lg-8 col-md-8 offset-2">
+              <h2 class="text-center">Create New Activity</h2>
+              <div class="form-group">
+                <label for="unit">Select Department</label>
+                <select id="unit" name="unit" class="form-control my-1">
+                  <option>News</option>
+                  <option>Sports</option>
+                  <option>Uhai TV</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="studio">Nature of Activity</label>
+                <select id="studio" name="studio" class="form-control my-1">
+                  <option>Scheduled Program</option>
+                  <option>Unscheduled Program</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="date">Date</label>
+                <input
+                  type="date"
+                  id="date"
+                  name="date"
+                  class="form-control my-1"
+                />
+              </div>
+              <div class="form-group">
+                <label for="start_time">Start time</label>
+                <input
+                  type="time"
+                  id="start_time"
+                  name="start_time"
+                  class="form-control my-1"
+                />
+              </div>
+              <div class="form-group">
+                <label for="end_time">End time</label>
+                <input
+                  type="time"
+                  id="end_time"
+                  name="end_time"
+                  class="form-control my-1"
+                />
+              </div>
+              <fieldset class="border border-primary p-2 my-3">
+                <legend class="mx-1 text-center">Required Resources</legend>
+                <p class="text text-center">
+                  Please provide the number of people required
+                </p>
+                <div class="form-group">
+                  <label for="camera">Camera Operators</label>
+                  <input
+                    min="0"
+                    type="number"
+                    id="camera"
+                    name="camera"
+                    class="form-control my-1"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="producer">Producers</label>
+                  <input
+                    min="0"
+                    type="number"
+                    id="producer"
+                    name="producer"
+                    class="form-control my-1"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="presenter">Presenters</label>
+                  <input
+                    min="0"
+                    type="number"
+                    id="presenter"
+                    name="presenter"
+                    class="form-control my-1"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="sound">Sound Engineers</label>
+                  <input
+                    min="0"
+                    type="number"
+                    id="sound"
+                    name="sound"
+                    class="form-control my-1"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="switcher">Switchers</label>
+                  <input
+                    min="0"
+                    type="number"
+                    id="switcher"
+                    name="switcher"
+                    class="form-control my-1"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="visual">Visual Editors</label>
+                  <input
+                    min="0"
+                    type="number"
+                    id="visual"
+                    name="visual"
+                    class="form-control my-1"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="electrical">Electrical Engineers</label>
+                  <input
+                    min="0"
+                    type="number"
+                    id="electrical"
+                    name="electrical"
+                    class="form-control my-1"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="lighting">Lighting Engineers</label>
+                  <input
+                    min="0"
+                    type="number"
+                    id="lighting"
+                    name="lighting"
+                    class="form-control my-1"
+                  />
+                </div>
+              </fieldset>
+              <div class="form-group">
+                <label for="note">Note</label>
+                <textarea
+                  id="note"
+                  name="note"
+                  class="form-control my-1"
+                ></textarea>
+              </div>
+              <div class="form-group my-3">
+                <input
+                  type="submit"
+                  name="btn-save"
+                  id="btn-save"
+                  class="btn btn-primary col-lg-3 col-md-3"
+                  value="SAVE"
+                />
+                <input
+                  type="button"
+                  name="btn-cancel"
+                  id="btn-cancel"
+                  class="btn btn-secondary col-lg-3 col-md-3"
+                  value="CANCEL"
+                />
+              </div>
+            </form>
+          </div>
+          <div id="add_schedule">
+            <form id="new_schedule_form" class="col-lg-8 col-md-8 offset-2">
+              <h2 class="text-center">Create Weekly Schedule</h2>
+              <div class="form-group">
+                <label for="unit">Select Unit</label>
+                <select id="unit" name="unit" class="form-control my-1">
+                  <option>Visual</option>
+                  <option>Camera</option>
+                  <option>Switcher</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="studio">Select Studio</label>
+                <select id="studio" name="studio" class="form-control my-1">
+                  <option>Studio 1</option>
+                  <option>Studio 2</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="crew_member">Select Crew Member</label>
+                <select
+                  id="crew_member"
+                  name="crew_member"
+                  class="form-control my-1"
+                >
+                  <option>Crew Member 1</option>
+                  <option>Crew Member 2</option>
+                  <option>Crew Member 3</option>
+                  <option>Crew Member 4</option>
+                  <option>Crew Member 5</option>
+                  <option>Crew Member 6</option>
+                  <option>Crew Member 7</option>
+                  <option>Crew Member 8</option>
+                  <option>Crew Member 9</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="date">Date</label>
+                <input
+                  type="date"
+                  id="date"
+                  name="date"
+                  class="form-control my-1"
+                />
+              </div>
+              <div class="form-group">
+                <label for="start_time">Start time</label>
+                <input
+                  type="time"
+                  id="start_time"
+                  name="start_time"
+                  class="form-control my-1"
+                />
+              </div>
+              <div class="form-group">
+                <label for="end_time">End time</label>
+                <input
+                  type="time"
+                  id="end_time"
+                  name="end_time"
+                  class="form-control my-1"
+                />
+              </div>
+              <div class="form-group">
+                <label for="activity">Activity</label>
+                <select id="activity" name="activity" class="form-control my-1">
+                  <option>Morning Trumpet Special</option>
+                  <option>Habari</option>
+                  <option>Alasiri Lounge</option>
+                  <option>Adhuhuri</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="note">Note</label>
+                <textarea
+                  id="note"
+                  name="note"
+                  class="form-control my-1"
+                ></textarea>
+              </div>
+              <div class="form-group my-3">
+                <input
+                  type="submit"
+                  name="btn-save"
+                  id="btn-save"
+                  class="btn btn-primary col-lg-3 col-md-3"
+                  value="SAVE"
+                />
+                <input
+                  type="button"
+                  name="btn-cancel"
+                  id="btn-cancel"
+                  class="btn btn-secondary col-lg-3 col-md-3"
+                  value="CANCEL"
+                />
+              </div>
+            </form>
+          </div>
+          <div id="schedule" class="col-lg-8 col-md-8 offset-2"></div>
+          <div class="modal" tabindex="-1" role="dialog" id="modal1">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Modal title</h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Crew</p>
+                  <div class="col-md-8 col-lg-8" id="event-crew"></div>
+                  <p>Date and Time</p>
+                  <p id="event-date"></p>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <!-- <div class="baseline">@2021. Neelansoft Technologies</div> -->
     </main>
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -89,6 +394,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="js/daypilot-all.min.js" type="text/javascript"></script>
+    <script src="js/data.js"></script>
     <script src="js/main.js"></script>
     <script>
       $(document).ready(function () {
