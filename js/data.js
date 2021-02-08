@@ -64,3 +64,57 @@ const calEvents = [
     note: "Live studio event",
   },
 ];
+
+//dummy activities
+const activities = [
+  {
+    id: 0,
+    status: "Open",
+    name: "Simba vs Azam Live Match",
+    nature: "Unscheduled",
+    department: "Sports",
+    region: "Dar es Salaam",
+    venue: "Chamazi Stadium",
+    date: "2021-02-12",
+    startTime: "16:00:00",
+    endTime: "18:00:00",
+    resources: [
+      {
+        camera: ["CO1", "CO2", "CO3", "CO4", "CO5", "CO6"],
+        sound: ["SE1", "SE2"],
+        producer: ["PR1"],
+        presenter: ["PS1", "PS2"],
+        switcher: ["ST1", "ST2"],
+        visual: ["VE1"],
+        electrical: ["EE1"],
+        lighting: ["LE1"],
+        note: "Great Match",
+      },
+    ],
+  },
+  {
+    id: 1,
+    status: "Open",
+    name: "Simba vs Azam Live Match",
+    nature: "Unscheduled",
+    department: "Sports",
+    region: "Dar es Salaam",
+    venue: "Chamazi Stadium",
+    date: "2021-02-12",
+    startTime: "16:00:00",
+    endTime: "18:00:00",
+    resources: [
+      {
+        camera: ["CO1", "CO2", "CO3", "CO4", "CO5", "CO6"],
+        sound: ["SE1", "SE2"],
+        producer: ["PR1"],
+        presenter: ["PS1", "PS2"],
+        switcher: ["ST1", "ST2"],
+        visual: ["VE1"],
+        electrical: ["EE1"],
+        lighting: ["LE1"],
+        note: "Great Match",
+      },
+    ],
+  },
+];

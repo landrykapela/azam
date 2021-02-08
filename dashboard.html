@@ -77,6 +77,9 @@
             <li>
               <a href="#security">Security</a>
             </li>
+            <li>
+              <a href="#logout">Logout</a>
+            </li>
           </ul>
         </nav>
 
@@ -86,9 +89,20 @@
               <i class="material-icons" id="sidebarCollapse">menu</i>
             </div>
           </nav>
+          <div id="all_activity">
+            <div class="col-lg-10 col-md-10 offset-1 row bg-primary">
+              <div class="col-md-1 col-lg-1">SN</div><div class="col-md-3 col-lg-3">Name</div><div class="col-md-3 col-lg-3">Date</div><div class="col-md-2 col-lg-2">Time</div><div>Status</div>
+            </div>
+           
+          </div>
           <div id="add_activity">
             <form id="new_activity_form" class="col-lg-8 col-md-8 offset-2">
               <h2 class="text-center">Create New Activity</h2>
+               <div class="form-group">
+                <label for="unit">Activity Name</label>
+                <input type="text" id="unit" name="unit" class="form-control my-1" placeholder="Enter a name"/>
+                  
+              </div>
               <div class="form-group">
                 <label for="unit">Select Department</label>
                 <select id="unit" name="unit" class="form-control my-1">
@@ -104,7 +118,37 @@
                   <option>Unscheduled Program</option>
                 </select>
               </div>
-
+             
+                <div class="form-group">
+                  <label for="region">Select Region</label>
+                  <select id="region" name="region" class="form-control my-1">
+                    <option selected>Dar es Salaam</option>
+                    <option>Arusha</option>
+                    <option>Dodoma</option>
+                    <option>Geita</option>
+                    <option>Iringa</option>
+                    <option>Kigoma</option>
+                    <option>Lindi</option>
+                    <option>Morogoro</option>
+                    <option>Mbeya</option>
+                    <option>Njombe</option>
+                    <option>Ruvuma</option>
+                    <option>Rukwa</option>
+                    <option>Shinyanga</option>
+                    <option>Singida</option>
+                    <option>Tanga</option>
+                    <option>Zanzibar</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="venue">Venue</label>
+                  <input
+                    id="venue"
+                    name="venue"
+                    placeholder="Enter Venue"
+                    class="form-control my-1"
+                  />
+                </div>
               <div class="form-group">
                 <label for="date">Date</label>
                 <input
@@ -132,11 +176,9 @@
                   class="form-control my-1"
                 />
               </div>
-              <fieldset class="border border-primary p-2 my-3">
-                <legend class="mx-1 text-center">Required Resources</legend>
-                <p class="text text-center">
-                  Please provide the number of people required
-                </p>
+              
+              <hr class="my-5"/>
+              <p>Resources</p>
                 <div class="form-group">
                   <label for="camera">Camera Operators</label>
                   <input
@@ -374,6 +416,37 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div id="logout">
+             <div class="modal" tabindex="-1" role="dialog" id="logout_modal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Logout</h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Are you sure you want to logout?</p>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Logout
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
           </div>
         </div>
       </div>

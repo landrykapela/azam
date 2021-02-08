@@ -36,7 +36,7 @@ const initializeSchedule = () => {
   dp.scale = "Manual";
   dp.theme = "calendar_g";
   dp.timeline = [];
-  for (var i = 0; i < 24; i++) {
+  for (var i = 0; i < 5; i++) {
     var day = {};
     day.start = dp.startDate.addDays(i);
     day.end = day.start.addDays(1);
