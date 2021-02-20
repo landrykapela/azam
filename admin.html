@@ -3,13 +3,10 @@
   <head>
     <title>Azam Roster Demo</title>
     <link href="css/main.css" rel="stylesheet" />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
+    <link href="css/iconfont/material-icons.css" rel="stylesheet" />
     <link
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      href="css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
@@ -126,7 +123,12 @@
             </div>
           </nav>
           <div id="add_user">
-            <form name="new_user_form" class="col-lg-8 col-md-8 offset-2">
+            <form
+              id="new_user_form"
+              name="new_user_form"
+              class="col-lg-8 col-md-8 offset-2"
+              method="POST"
+            >
               <h2 class="mx-1 text-center col-md-12 col-lg-12">Add New User</h2>
               <div class="form-group row mx-1">
                 <input
@@ -195,37 +197,27 @@
                 />
               </div>
               <div class="form-group mx-1 row">
-                <label for="department">Department</label>
-                <select id="department" class="form-control">
-                  <option>Administration</option>
-                  <option>Finance</option>
-                  <option>Transport</option>
-                  <option>Engineering</option>
-                  <option>Broadcasting</option>
-                  <option>News</option>
-                  <option>Sports</option>
-                  <option>Production</option>
+                <label for="user_department">Department</label>
+                <select
+                  id="user_department"
+                  class="form-control"
+                  onchange="populate('user_unit',units.filter(u=>{return u.deptId==this.value}));"
+                ></select>
+              </div>
+              <div class="form-group mx-1 row">
+                <label for="user_unit">Unit</label>
+                <select
+                  id="user_unit"
+                  class="form-control"
+                  onchange="populate('user_position',positions.filter(p=>{return p.unit==this.value}));"
+                >
+                  <option>Not Available</option>
                 </select>
               </div>
               <div class="form-group mx-1 row">
-                <label for="unit">Unit</label>
-                <select id="unit" class="form-control">
-                  <option>Visual</option>
-                  <option>Camera</option>
-                  <option>Xfres</option>
-                </select>
-              </div>
-              <div class="form-group mx-1 row">
-                <label for="position">Position</label>
-                <select id="position" class="form-control">
-                  <option>CEO</option>
-                  <option>Director</option>
-                  <option>Senior Manager</option>
-                  <option>Manager</option>
-                  <option>Head of Unit</option>
-                  <option>Switcher</option>
-                  <option>Camera Operator</option>
-                  <option>Sound Engineer</option>
+                <label for="user_position">Position</label>
+                <select id="user_position" class="form-control">
+                  <option>Not Available</option>
                 </select>
               </div>
               <div class="my-3 row col-lg-12 col-md-12">
@@ -250,6 +242,14 @@
               name="search"
               class="form-control col-md-8 col-lg-8 col-sm-12 offset-2"
             />
+            <div
+              class="col-md-8 col-lg-8 col-sm-12 offset-2 row bg-primary my-2"
+            >
+              <span class="col-md-4 col-lg-4">Name</span>
+              <span class="col-md-4 col-lg-4">Position</span>
+              <span class="col-md-4 col-lg-4">Department</span>
+            </div>
+            <div id="list"></div>
           </div>
           <div id="edit_user">
             <form name="edit_user_form" class="col-lg-8 col-md-8 offset-2">
@@ -368,31 +368,81 @@
               </div>
             </form>
           </div>
+          <div id="add_position">
+            <form
+              id="new_position_form"
+              name="new_position_form"
+              class="col-lg-8 col-md-8 offset-2"
+              method="POST"
+            >
+              <h2 class="mx-1 text-center col-md-12 col-lg-12">Add Position</h2>
+              <div class="form-group row mx-1">
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="Name"
+                  class="form-control my-1"
+                />
+              </div>
+              <div class="form-group row mx-1">
+                <label for="position_dept">Department</label>
+                <select
+                  id="position_dept"
+                  class="form-control my-1"
+                  onchange="populate('position_unit',units.filter(u=>{return u.deptId==this.value}));"
+                ></select>
+              </div>
+
+              <div class="form-group mx-1 row">
+                <label for="position_unit">Unit</label>
+                <select id="position_unit" class="form-control"></select>
+              </div>
+
+              <div class="my-3 row col-lg-12 col-md-12">
+                <input
+                  type="submit"
+                  class="btn btn-primary col-lg-3 col-md-3 mx-1"
+                  value="SAVE"
+                />
+                <input
+                  type="button"
+                  class="btn btn-secondary col-lg-3 col-md-3 mx-1"
+                  value="CANCEL"
+                />
+              </div>
+            </form>
+          </div>
         </div>
       </div>
       <!-- <div class="baseline">@2021. Neelansoft Technologies</div> -->
     </main>
     <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      src="js/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
       crossorigin="anonymous"
     ></script>
     <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      src="js/popper.min.js"
       integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
       crossorigin="anonymous"
     ></script>
     <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      src="js/bootstrap.min.js"
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+    <!-- <script src="js/data.js"></script> -->
     <script src="js/main.js"></script>
     <script>
       $(document).ready(function () {
         $("#sidebarCollapse").on("click", function () {
           $("#sidebar").toggleClass("active");
         });
+        // var storage = window.localStorage;
+        // storage.setItem("users", JSON.stringify(users));
+        // storage.setItem("departments", JSON.stringify(departments));
+        // storage.setItem("units", JSON.stringify(units));
+        // storage.setItem("positions", JSON.stringify(users));
       });
     </script>
   </body>
