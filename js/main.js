@@ -3,12 +3,17 @@ const units = JSON.parse(localStorage.units);
 const positions = JSON.parse(localStorage.positions);
 const departments = JSON.parse(localStorage.departments);
 const users = JSON.parse(localStorage.users);
-
+// console.log("depts: ", departments);
 const loginForm = document.querySelector("#login-form");
 if (loginForm) {
   loginForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    window.location.pathname = "/admin.html";
+    let inputs = Array.from(e.target.elements);
+    console.log("inputs: ", inputs);
+    let email = inputs[0].value;
+    if (email.toLowerCase() === "admin@azam.com")
+      window.location.pathname = "/admin.html";
+    else window.location.pathname = "/dashboard.html";
   });
 }
 
@@ -17,7 +22,6 @@ const populate = (id, data, dependant) => {
   let select = document.getElementById(id);
 
   select.innerHTML = "";
-  console.log("options: ", select.options.length);
 
   data.forEach((d, i) => {
     let opt = new Option(d.name, d.id);
@@ -37,13 +41,14 @@ const loadUsers = (id, users) => {
     if (c.id === "list") listContainer = c;
   });
   listContainer.innerHTML = "";
-  users.forEach((u) => {
+  users.forEach((u, i) => {
     const row = document.createElement("div");
     row.classList.add("col-md-8");
     row.classList.add("col-lg-8");
     row.classList.add("col-sm-12");
     row.classList.add("offset-2");
     row.classList.add("row");
+    row.classList.add("highlight");
     row.id = u.id;
     const name = document.createElement("span");
     name.classList.add("col-md-4");
@@ -63,8 +68,54 @@ const loadUsers = (id, users) => {
     listContainer.appendChild(row);
   });
 };
+
+//load users list
+const showPositions = (id, positions) => {
+  const container = document.getElementById(id);
+  const contChildren = Array.from(container.children);
+  var listContainer;
+  contChildren.forEach((c) => {
+    if (c.id === "list") listContainer = c;
+  });
+  listContainer.innerHTML = "";
+  positions = positions.map((p) => {
+    let pos = p;
+    units.forEach((u) => {
+      if (u.id == p.unit) p.unit_name = u.name;
+    });
+    departments.forEach((d) => {
+      if (d.id == p.deptId) p.department = d.name;
+    });
+    return pos;
+  });
+
+  positions.forEach((u) => {
+    const row = document.createElement("div");
+    row.classList.add("col-md-8");
+    row.classList.add("col-lg-8");
+    row.classList.add("col-sm-12");
+    row.classList.add("offset-2");
+    row.classList.add("row");
+    row.id = u.id;
+    const name = document.createElement("span");
+    name.classList.add("col-md-4");
+    name.classList.add("col-lg-4");
+    name.textContent = u.name;
+    row.appendChild(name);
+    const unit = document.createElement("span");
+    unit.classList.add("col-md-4");
+    unit.classList.add("col-lg-4");
+    unit.textContent = u.unit_name;
+    row.appendChild(unit);
+    const dept = document.createElement("span");
+    dept.classList.add("col-md-4");
+    dept.classList.add("col-lg-4");
+    dept.textContent = u.department;
+    row.appendChild(dept);
+    listContainer.appendChild(row);
+  });
+};
 const showContent = (hash) => {
-  console.log("hash changed: ", hash);
   let content = document.querySelector("#content");
   let contentChildren = Array.from(content.children);
   contentChildren.forEach((child) => {
@@ -75,9 +126,19 @@ const showContent = (hash) => {
   contentChildren.forEach((child) => {
     if (child.id === hash.substr(1)) child.style.display = "block";
     if (child.id === "all_users") {
+      let users = JSON.parse(localStorage.users);
+      users.sort((a, b) => {
+        return a.name.toLowerCase() - b.name.toLowerCase();
+      });
       loadUsers(child.id, users);
     }
-    // if(child.id ==="")
+    if (child.id === "all_positions") {
+      let positions = JSON.parse(localStorage.positions);
+      positions.sort((a, b) => {
+        return a.name.toLowerCase() - b.name.toLowerCase();
+      });
+      showPositions(child.id, positions);
+    }
     if (child.id === "add_user") {
       let myunits = units.filter((u) => {
         return u.deptId == departments[0].id;
@@ -90,9 +151,16 @@ const showContent = (hash) => {
         data: myunits,
         dependant: { id: "user_position", data: mypos },
       });
-      if (child.id === "add_position") {
-        populate("position_dept", departments, null);
-      }
+    }
+    if (child.id === "add_position") {
+      let myunits = units.filter((u) => {
+        return u.deptId == departments[0].id;
+      });
+      populate("position_dept", departments, {
+        id: "position_unit",
+        data: myunits,
+        dependent: null,
+      });
     }
   });
   if (hash === "#all_users") {
@@ -148,7 +216,8 @@ if (window.location.pathname.includes("/admin.html")) {
       });
       positions.push(position);
       window.localStorage.setItem("positions", JSON.stringify(positions));
-      console.log("ls2: ", window.localStorage);
+      // console.log("ls2: ", window.localStor?age);
+      window.location.hash = "#all_positions";
     });
   }
 
@@ -158,12 +227,13 @@ if (window.location.pathname.includes("/admin.html")) {
     newUserForm.addEventListener("submit", (e) => {
       e.preventDefault();
       let user = {};
+      let users = localStorage.users;
       if (users === null || users === undefined) {
         users = [];
         user.id = users.length;
       } else {
         users = users.sort((a, b) => {
-          return a.id - b.id;
+          return a.name.toLowerCase() - b.name.toLowerCase();
         });
         user.id = users[users.length - 1].id + 1;
       }
@@ -180,6 +250,7 @@ if (window.location.pathname.includes("/admin.html")) {
           user.position = input.options[input.options.selectedIndex].text;
         }
       });
+      window.location.hash = "#all_users";
     });
   }
 }

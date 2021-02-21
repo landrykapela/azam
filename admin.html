@@ -111,7 +111,7 @@
               <a href="#reports">Reports</a>
             </li>
             <li>
-              <a href="#security">Security</a>
+              <a href="/">Logout</a>
             </li>
           </ul>
         </nav>
@@ -227,6 +227,7 @@
                   value="SAVE"
                 />
                 <input
+                  onclick="window.location.hash='#all_users'"
                   type="button"
                   class="btn btn-secondary col-lg-3 col-md-3 mx-1"
                   value="CANCEL"
@@ -235,6 +236,9 @@
             </form>
           </div>
           <div id="all_users">
+            <h2 class="text-center col-md-8 col-lg-8 col-sm-12 offset-2">
+              Users
+            </h2>
             <input
               type="text"
               placeholder="search"
@@ -405,12 +409,33 @@
                   value="SAVE"
                 />
                 <input
+                  onclick="window.location.hash='#all_positions'"
                   type="button"
                   class="btn btn-secondary col-lg-3 col-md-3 mx-1"
                   value="CANCEL"
                 />
               </div>
             </form>
+          </div>
+          <div id="all_positions">
+            <h2 class="text-center col-md-8 col-lg-8 col-sm-12 offset-2">
+              Positions
+            </h2>
+            <input
+              type="text"
+              placeholder="search"
+              id="search_positions"
+              name="search_positions"
+              class="form-control col-md-8 col-lg-8 col-sm-12 offset-2"
+            />
+            <div
+              class="col-md-8 col-lg-8 col-sm-12 offset-2 row bg-primary my-2"
+            >
+              <span class="col-md-4 col-lg-4">Name</span>
+              <span class="col-md-4 col-lg-4">Unit</span>
+              <span class="col-md-4 col-lg-4">Department</span>
+            </div>
+            <div id="list"></div>
           </div>
         </div>
       </div>
@@ -437,6 +462,9 @@
       $(document).ready(function () {
         $("#sidebarCollapse").on("click", function () {
           $("#sidebar").toggleClass("active");
+        });
+        $("#sidebarCollapse").on("click", function () {
+          $("#content").toggleClass("active");
         });
         // var storage = window.localStorage;
         // storage.setItem("users", JSON.stringify(users));

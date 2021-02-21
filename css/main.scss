@@ -1,5 +1,6 @@
 $defaulttextcolor: #363636;
 $primarycolor: #213f9a;
+$primarycolorLight: #6cabf3e5;
 $accentcolor: #fe0002;
 $white: #ffffff;
 @mixin flex($d: row, $j: flex-start, $a: center) {
@@ -50,12 +51,13 @@ form {
   min-width: 250px;
   max-width: 250px;
   min-height: 100vh;
-  // position: fixed;
-  // top: 0;
-  // left: 0;
+  // overflow-y: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 #content {
-  // margin-left: 250px;
+  margin-left: 250px;
   width: 100%;
   overflow-x: hidden;
   // background-color: red;
@@ -65,6 +67,10 @@ form {
 }
 #sidebar.active {
   margin-left: -250px;
+  position: unset;
+}
+#content.active {
+  margin-left: 0;
 }
 a[data-toggle="collapse"] {
   position: relative;
@@ -145,5 +151,9 @@ ul ul a {
   color: $white;
 }
 .material-icons {
+  cursor: pointer;
+}
+.highlight:hover {
+  background-color: $primarycolorLight;
   cursor: pointer;
 }

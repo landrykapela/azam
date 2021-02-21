@@ -50,9 +50,13 @@ form {
   min-width: 250px;
   max-width: 250px;
   min-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 #content {
+  margin-left: 250px;
   width: 100%;
   overflow-x: hidden;
 }
@@ -63,6 +67,11 @@ form {
 
 #sidebar.active {
   margin-left: -250px;
+  position: unset;
+}
+
+#content.active {
+  margin-left: 0;
 }
 
 a[data-toggle=collapse] {
@@ -147,6 +156,11 @@ ul ul a {
 }
 
 .material-icons {
+  cursor: pointer;
+}
+
+.highlight:hover {
+  background-color: #6cabf3e5;
   cursor: pointer;
 }
 
