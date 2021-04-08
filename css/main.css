@@ -43,26 +43,32 @@ form {
 .wrapper {
   display: flex;
   width: 100%;
+  flex-direction: row;
   align-items: stretch;
+  overflow-x: hidden;
 }
 
 #sidebar {
   min-width: 250px;
   max-width: 250px;
   min-height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
+  width: 250px;
 }
 
 #content {
-  margin-left: 250px;
-  width: 100%;
-  overflow-x: hidden;
+  margin: 2em auto;
+  width: calc(100% - 250px);
 }
 
 #content > div {
   display: none;
+  margin: 2em auto;
+}
+
+#content.active > div {
+  width: 80%;
+  margin: 2em auto;
+  padding: 2em;
 }
 
 #sidebar.active {
@@ -71,7 +77,8 @@ form {
 }
 
 #content.active {
-  margin-left: 0;
+  margin: 0 auto;
+  width: calc(100% - 250px);
 }
 
 a[data-toggle=collapse] {
@@ -143,7 +150,7 @@ a:focus {
 }
 
 #sidebar ul li.active > a,
-a[aria-expanded=true] {
+#sidebar a[aria-expanded=true] {
   color: #ffffff;
   background: #6d7fcc;
 }
@@ -162,6 +169,12 @@ ul ul a {
 .highlight:hover {
   background-color: #6cabf3e5;
   cursor: pointer;
+}
+
+a.icons:visited,
+a.icon:active,
+a.icon:hover {
+  background-color: unset;
 }
 
 /*# sourceMappingURL=main.css.map */

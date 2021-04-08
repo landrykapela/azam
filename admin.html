@@ -372,6 +372,51 @@
               </div>
             </form>
           </div>
+          <div id="add_unit">
+            <form
+              id="new_unit_form"
+              name="new_unit_form"
+              class="col-lg-8 col-md-8 offset-2"
+              method="POST"
+            >
+              <h2 class="mx-1 text-center col-md-12 col-lg-12">Add Unit</h2>
+              <div class="form-group row mx-1">
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="Name"
+                  class="form-control my-1"
+                />
+              </div>
+              <div class="form-group row mx-1">
+                <label for="unit_dept">Department</label>
+                <select
+                  id="unit_dept"
+                  class="form-control my-1"
+                  onchange="populate('unit_hod',users.filter(u=>{return u.deptId==this.value}));"
+                ></select>
+              </div>
+
+              <div class="form-group mx-1 row">
+                <label for="unit_hod">Head of Unit</label>
+                <select id="unit_hod" class="form-control"></select>
+              </div>
+
+              <div class="my-3 row col-lg-12 col-md-12">
+                <input
+                  type="submit"
+                  class="btn btn-primary col-lg-3 col-md-3 mx-1"
+                  value="SAVE"
+                />
+                <input
+                  onclick="window.location.hash='#all_positions'"
+                  type="button"
+                  class="btn btn-secondary col-lg-3 col-md-3 mx-1"
+                  value="CANCEL"
+                />
+              </div>
+            </form>
+          </div>
           <div id="add_position">
             <form
               id="new_position_form"
@@ -417,6 +462,45 @@
               </div>
             </form>
           </div>
+          <div id="add_department">
+            <form
+              id="new_department_form"
+              name="new_department_form"
+              class="col-lg-8 col-md-8 offset-2"
+              method="POST"
+            >
+              <h2 class="mx-1 text-center col-md-12 col-lg-12">
+                Add Department
+              </h2>
+              <div class="form-group row mx-1">
+                <label for="dept_name">Department Name</label>
+                <input
+                  type="text"
+                  id="dept_name"
+                  placeholder="Name"
+                  class="form-control my-1"
+                />
+              </div>
+              <div class="form-group row mx-1">
+                <label for="dept_manager">Department Manager</label>
+                <select id="dept_manager" class="form-control my-1"></select>
+              </div>
+
+              <div class="my-3 row col-lg-12 col-md-12">
+                <input
+                  type="submit"
+                  class="btn btn-primary col-lg-3 col-md-3 mx-1"
+                  value="SAVE"
+                />
+                <input
+                  onclick="window.location.hash='#all_departments'"
+                  type="button"
+                  class="btn btn-secondary col-lg-3 col-md-3 mx-1"
+                  value="CANCEL"
+                />
+              </div>
+            </form>
+          </div>
           <div id="all_positions">
             <h2 class="text-center col-md-8 col-lg-8 col-sm-12 offset-2">
               Positions
@@ -434,6 +518,45 @@
               <span class="col-md-4 col-lg-4">Name</span>
               <span class="col-md-4 col-lg-4">Unit</span>
               <span class="col-md-4 col-lg-4">Department</span>
+            </div>
+            <div id="list"></div>
+          </div>
+          <div id="all_units">
+            <h2 class="text-center col-md-8 col-lg-8 col-sm-12 offset-2">
+              Units
+            </h2>
+            <input
+              type="text"
+              placeholder="search"
+              id="search_units"
+              name="search_units"
+              class="form-control col-md-8 col-lg-8 col-sm-12 offset-2"
+            />
+            <div
+              class="col-md-8 col-lg-8 col-sm-12 offset-2 row bg-primary my-2"
+            >
+              <span class="col-md-4 col-lg-4">Name</span>
+              <span class="col-md-4 col-lg-4">Department</span>
+              <span class="col-md-4 col-lg-4">Head of Unit</span>
+            </div>
+            <div id="list"></div>
+          </div>
+          <div id="all_departments">
+            <h2 class="text-center col-md-8 col-lg-8 col-sm-12 offset-2">
+              Departments
+            </h2>
+            <input
+              type="text"
+              placeholder="search"
+              id="search_positions"
+              name="search_positions"
+              class="form-control col-md-8 col-lg-8 col-sm-12 offset-2"
+            />
+            <div
+              class="col-md-8 col-lg-8 col-sm-12 offset-2 row bg-primary my-2"
+            >
+              <span class="col-md-6 col-lg-6">Name</span>
+              <span class="col-md-6 col-lg-6">Manager</span>
             </div>
             <div id="list"></div>
           </div>
